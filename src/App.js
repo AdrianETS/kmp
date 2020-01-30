@@ -2,8 +2,6 @@ import React from 'react';
 import LoginForm from './components/LoginForm.js'
 import './App.css';
 
-
-
 class App extends React.Component {
 
   constructor(props) {
@@ -18,12 +16,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          My secured app
+      <div>
         <br />
           <LoginForm {...{loginStateChanged: this.loginStateChanged}}/>
-        </header>
       </div>
     );
   }
