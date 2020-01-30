@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import LoginForm from './components/LoginForm.js'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = props;
+    this.loginStateChanged = this.loginStateChanged.bind(this);
+  }
+
+  loginStateChanged(status){
+    this.setState({loggedUser: status});
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          My secured app
+        <br />
+          <LoginForm {...{loginStateChanged: this.loginStateChanged}}/>
+        </header>
+      </div>
+    );
+  }
+}
 export default App;
