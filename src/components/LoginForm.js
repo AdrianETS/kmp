@@ -15,7 +15,8 @@ class LoginForm extends React.Component {
     processLogin(event) {
         if (Auth.checkCredentials(this.state.username, this.state.password)) {
             Auth.storeAuth(this.state.username, this.state.password);
-            this.props.loginStateChanged(false);
+            this.props.loginStateChanged(true);
+            this.setState({show:true});
         } else {
             alert("Username and pass: " + this.state.username + " - " + this.state.password + " FAILED");
         }
@@ -32,7 +33,7 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        return (this.props.loginStateChanged &&
+        return (!this.state.show &&
             <form >
                 <label>Enter credentials</label>
                 <br />
@@ -40,9 +41,8 @@ class LoginForm extends React.Component {
                 <br />
                 <label>Password</label><input value={this.state.password} onChange={this.handlePasswordChange}></input>
                 <br />
-                <input type="submit" value="Submit" onClick={this.processLogin} />
+                <input class="btn btn-primary" type="button" value="Submit" onClick={this.processLogin} />
             </form>);
-
 
     }
 
