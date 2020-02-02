@@ -1,7 +1,10 @@
 import React from 'react';
 import Auth from './../utils/Auth';
+import {AppContext} from './../context/ContextProvider.js';
 
 class LoginForm extends React.Component {
+
+    static contextType = AppContext;
 
     constructor(props) {
         super(props);
@@ -15,8 +18,8 @@ class LoginForm extends React.Component {
     processLogin(event) {
         if (Auth.checkCredentials(this.state.username, this.state.password)) {
             Auth.storeAuth(this.state.username, this.state.password);
-            this.props.loginStateChanged(true);
-            this.setState({show:true});
+            this.context.login(this.state.username);
+            this.props.history.push("/dashboard");
         } else {
             alert("Username and pass: " + this.state.username + " - " + this.state.password + " FAILED");
         }
@@ -33,7 +36,7 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        return (!this.state.show &&            
+        return !this.context.userLogged && (           
             <div className="container">
               <div className="row">
                 <div className="col-lg-10 col-xl-9 mx-auto">

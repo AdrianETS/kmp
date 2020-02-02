@@ -1,6 +1,9 @@
 import React from 'react';
-import LoginForm from './components/LoginForm.js'
+import LoginForm from './components/LoginForm.js';
 import './App.css';
+import { ContextProvider } from './context/ContextProvider';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 
 class App extends React.Component {
 
@@ -16,10 +19,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <br />
-          <LoginForm {...{loginStateChanged: this.loginStateChanged}}/>
-      </div>
+      <ContextProvider>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={LoginForm} />
+            <Route path="/dashboard" component={Dashboard} />
+          </Switch>
+        </Router>
+      </ContextProvider>
     );
   }
 }
