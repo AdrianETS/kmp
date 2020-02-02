@@ -23,7 +23,7 @@ class Navbar extends React.Component {
                             <a class="nav-link active"href = {"/#"}><Link to = "/about">About</Link></a>
                         <div class="navbar-nav">
                             <ContextConsumer>
-                                {(processLogout) =>(<Logout/>)}
+                                {({processLogout}) =><Logout/>}
                             </ContextConsumer>
                         </div>
                     </div>
