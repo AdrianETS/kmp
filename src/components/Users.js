@@ -1,13 +1,14 @@
 import React from "react";
 import { AppContext } from "./../context/ContextProvider";
 import Navbar from "./Navbar";
+import Topbar from "./Topbar";
 
 class Users extends React.Component {
     static contextType = AppContext;
 
     constructor(props) {
         super(props);
-        this.state = {listOfUsers: []}
+        this.state = {}//{listOfUsers: []}
     }
 
     componentDidMount() {
@@ -19,16 +20,20 @@ class Users extends React.Component {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(res => res.json())
       .then((json) => {
-        this.setState({ listOfUsers: json })
+        //this.setState({ listOfUsers: json })
+        this.context.setListOfUsers(json);
+        this.context.setOriginalUsers(json);
+        
       })
     }
 
     render() {
         return <div>
             <Navbar />
+            <Topbar />
             <h6>This is the list of users:</h6>
             <ol> 
-            {this.state.listOfUsers.map(user => <li>{user.name}-{user.email}</li>)}
+            {this.context.listOfUsers.map(user => <li>{user.name}-{user.email}</li>)}
             </ol>
         </div>
     }
