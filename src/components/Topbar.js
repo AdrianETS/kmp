@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppContext} from './../context/ContextProvider.js';
+import { AppContext } from './../context/ContextProvider.js';
 import Users from "./Users";
 
 class Topbar extends React.Component {
@@ -9,17 +9,56 @@ class Topbar extends React.Component {
     constructor(props) {
         super(props);
         this.searchUsers = this.searchUsers.bind(this);
+        this.searchUsersByLatNorth = this.searchUsersByLatNorth.bind(this);
+        this.searchUsersByLatSouth = this.searchUsersByLatSouth.bind(this);
     }
 
 
-    searchUsers(event){
-        this.context.setListOfUsers(this.context.originalUsers.filter(item=>item.name.toUpperCase().includes(event.target.value.toUpperCase())));
+    searchUsers(event) {
+        this.context.setListOfUsers(this.context.originalUsers.filter(item => item.name.toUpperCase().includes(event.target.value.toUpperCase())));
     }
+
+    searchUsersByLatNorth(event) {
+        let listOfUsersCopy = this.context.listOfUsers;
+        if (event.target.checked) {
+            listOfUsersCopy.forEach(
+                (item, index, array) => {
+                    if (parseInt(item.address.geo.lat) > 0) array[index] = null;
+                });
+                this.context.setListOfUsers(listOfUsersCopy.filter(item=>item != null));
+        } else {
+
+            this.context.setListOfUsers([...this.context.listOfUsers, ...this.context.originalUsers.filter(item => parseInt(item.address.geo.lat) > 0)]);
+
+        }
+
+    }
+
+    searchUsersByLatSouth(event) {
+        let listOfUsersCopy = this.context.listOfUsers;
+        if (event.target.checked) {
+            listOfUsersCopy.forEach(
+                (item, index, array) => {
+                    if (parseInt(item.address.geo.lat) < 0) array[index] = null;
+                });
+                this.context.setListOfUsers(listOfUsersCopy.filter(item=>item != null));
+        } else {
+           this.context.setListOfUsers([...this.context.listOfUsers, ...this.context.originalUsers.filter(item => parseInt(item.address.geo.lat) < 0)]);
+        }
+
+    }
+
+
+
 
 
     render() {
         return (
             <div>
+                <input type="checkbox" value="North" onChange={this.searchUsersByLatNorth} /> North
+                <br></br>
+                <input type="checkbox" value="South" onChange={this.searchUsersByLatSouth} /> South
+
                 <nav className="navbar navbar-light bg-light">
                     <a className="form-inline"></a>
                     <form className="form-inline">
@@ -33,3 +72,5 @@ class Topbar extends React.Component {
 }
 
 export default Topbar;
+
+

@@ -33,7 +33,7 @@ class Users extends React.Component {
             <Topbar />
             <h6>This is the list of users:</h6>
             <ol> 
-            {this.context.listOfUsers.map(user => <li>{user.name}-{user.email}</li>)}
+            {this.context.listOfUsers.map(user => <li>{user.name}-{user.address.geo.lat}</li>)}
             </ol>
         </div>
     }
