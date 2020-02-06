@@ -21,8 +21,8 @@ class Users extends React.Component {
       .then(res => res.json())
       .then((json) => {
         //this.setState({ listOfUsers: json })
-        this.context.setListOfUsers(json);
-        this.context.setOriginalUsers(json);
+        this.context.setListOfUsers([...json]);
+        this.context.setOriginalUsers([...json]);
         
       })
     }
