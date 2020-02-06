@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm.js";
 import Dashboard from "./Dashboard";
 import { Link } from 'react-router-dom';
 import Logout from './Logout.js';
-//import Logout from "./Logout";
+import WelcomeMessage from "./WelcomeMessage";
 
 class Navbar extends React.Component {
 
@@ -19,13 +19,19 @@ class Navbar extends React.Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="collapse navbar-collapse" itemID="navbarNavAltMarkup">
-                            <a class="nav-link active" href = {"/#"}><Link to = "/">Home</Link></a>
-                            <a class="nav-link active"href = {"/#"}><Link to = "/about">About</Link></a>
-                        <div class="navbar-nav">
-                            <ContextConsumer>
-                                {({processLogout}) =><Logout/>}
-                            </ContextConsumer>
-                        </div>
+                        <a className="nav-link active" href={"/#"}><Link to="/dashboard">Home</Link></a>
+                        <a className="nav-link active" href={"/#"}><Link to="/about">About</Link></a>
+                        <a className="nav-link active" href={"/#"}><Link to="/users">Users</Link></a>
+                        
+                            <div className="ml-auto" style = {{float: "right"}}>
+                                <ContextConsumer>
+                                {({ userName}) => <WelcomeMessage />}
+                                </ContextConsumer>
+                                <ContextConsumer>
+                                    {({ processLogout }) => <Logout />}
+                                </ContextConsumer>
+                            </div>
+                        
                     </div>
                 </nav>
             </div>

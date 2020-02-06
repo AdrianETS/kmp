@@ -1,3 +1,5 @@
+let adminUsers = ["Adrian","Marcos","Merche","Petr","Zsofia"];
+
 function checkLocalAuth() {
     let user = window.localStorage.getItem('user');
     let pass = window.localStorage.getItem('pass');
@@ -10,12 +12,21 @@ function checkLocalAuth() {
 }
 
 function checkCredentials(user, pass) {
-    return (user === "Adrian" && pass === "1");
+    for(let i = 0; i< adminUsers.length; i++){
+        if(user === adminUsers[i]){
+            return (user === adminUsers[i] && pass === "1");
+        }
+    }  
+}
+
+function getUserName(){
+    return window.localStorage.getItem('user');
 }
 
 function storeAuth(user, pass) {
     window.localStorage.setItem('user', user);
     window.localStorage.setItem('pass', pass);
+
 }
 
 function removeUserCredentials() {
@@ -23,4 +34,4 @@ function removeUserCredentials() {
     window.localStorage.removeItem('pass');
 }
 
-export default { storeAuth, checkCredentials, checkLocalAuth, removeUserCredentials };
+export default { storeAuth, checkCredentials, checkLocalAuth, removeUserCredentials, getUserName };

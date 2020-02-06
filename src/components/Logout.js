@@ -10,7 +10,8 @@ function Logout(props) {
     }
 
     const context = useContext(AppContext);
-    return (<input type = "button" value = "Logout" onClick = {processLogout}/>)
+    return (<button type="button" className="btn btn-primary" onClick={processLogout}>Logout</button>)
+    
 
 }
 

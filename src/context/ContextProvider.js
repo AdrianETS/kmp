@@ -1,5 +1,6 @@
 import React from 'react';
 import { createContext } from "react";
+import Auth from '../utils/Auth';
 
 export const AppContext = createContext();
 
@@ -10,30 +11,43 @@ export class ContextProvider extends React.Component {
 
         this.state = {userName: "", userLogged: false};
         this.processLogout = this.processLogout.bind(this);
-        this.login = this.login.bind(this);
+        this.setUserLogged = this.setUserLogged.bind(this);
+        this.setUserName = this.setUserName.bind(this);
+
     }
 
 
     processLogout(){
-        this.setState({userLogged: false});
+        this.setState({userLogged: false, userName: ""});
+        Auth.removeUserCredentials();
     }
 
-    login(user){
-        this.setState({userLogged: true}); 
+    setUserLogged(status){
+        this.setState({userLogged: status}); 
+        
+    }
+
+    setUserName(user){
         this.setState({userName: user});
+    }
+
+    componentDidMount(){
+        Auth.checkLocalAuth() && this.setUserValues();
+    }
+   
+
+    setUserValues(){
+        this.setState({userLogged: true, userName: Auth.getUserName()});
     }
 
 
     render() {
         return (
             <AppContext.Provider
-                value={{ ...this.state, login: this.login, processLogout:this.processLogout}}
+                value={{ ...this.state, setUserLogged: this.setUserLogged, processLogout:this.processLogout, setUserName: this.setUserName}}
             >
-                {/*Inyectaremos el estado (todos sus atributos, en este caso solo tenemos theme) 
-                de AppContext y el método toogleTheme a los hijos*/}
 
                 {this.props.children}
-                {/*Esto va siempre aquí, decimos que los hijos tendrán este contexto.*/}
 
             </AppContext.Provider>
         );
