@@ -1,6 +1,9 @@
 import React from 'react';
 import { AppContext } from './../context/ContextProvider.js';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Users from "./Users";
+import CreateUser from "./CreateUser";
+import { Link } from 'react-router-dom';
 
 class Topbar extends React.Component {
 
@@ -11,6 +14,7 @@ class Topbar extends React.Component {
         this.searchUsers = this.searchUsers.bind(this);
         this.searchUsersByLatNorth = this.searchUsersByLatNorth.bind(this);
         this.searchUsersByLatSouth = this.searchUsersByLatSouth.bind(this);
+        this.goToCreateUser = this.goToCreateUser.bind(this);
     }
 
 
@@ -48,6 +52,9 @@ class Topbar extends React.Component {
 
     }
 
+    goToCreateUser(){
+        this.props.history.push("/createuser");
+    }
 
 
 
@@ -58,6 +65,7 @@ class Topbar extends React.Component {
                 <input type="checkbox" value="North" onChange={this.searchUsersByLatNorth} /> North
                 <br></br>
                 <input type="checkbox" value="South" onChange={this.searchUsersByLatSouth} /> South
+                <button type="button" className="btn btn-link" ><Link to="/createuser">Create users</Link></button>
 
                 <nav className="navbar navbar-light bg-light">
                     <a className="form-inline"></a>

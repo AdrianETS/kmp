@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Auth from "./utils/Auth";
 import Users from "./components/Users";
+import CreateUser from "./components/CreateUser";
 
 class App extends React.Component {
 
@@ -24,6 +25,7 @@ class App extends React.Component {
             <Route path="/" exact component={LoginForm} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path= "/users" component={Users} />
+            <Route path= "/createuser" component={CreateUser} />
           </Switch>
         </Router>
       </ContextProvider>
