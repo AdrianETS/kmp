@@ -16,6 +16,8 @@ export class ContextProvider extends React.Component {
         this.setUserName = this.setUserName.bind(this);
         this.setListOfUsers = this.setListOfUsers.bind(this);
         this.setOriginalUsers = this.setOriginalUsers.bind(this);
+
+        this.setUserId = this.setUserId.bind(this);
     }
 
 
@@ -51,12 +53,15 @@ export class ContextProvider extends React.Component {
         this.setState({originalUsers: list});
     }
 
+    setUserId(id){
+        this.setState({userId: id});
+    }
 
     render() {
         return (
             <AppContext.Provider
                 value={{ ...this.state, setUserLogged: this.setUserLogged, processLogout:this.processLogout, setUserName: this.setUserName,
-                    setListOfUsers: this.setListOfUsers, setOriginalUsers: this.setOriginalUsers}}
+                    setListOfUsers: this.setListOfUsers, setOriginalUsers: this.setOriginalUsers, setUserId: this.setUserId}}
             >
 
                 {this.props.children}

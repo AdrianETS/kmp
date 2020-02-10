@@ -3,6 +3,7 @@ import { AppContext } from "./../context/ContextProvider";
 import Navbar from "./Navbar";
 import { Link } from 'react-router-dom';
 import Topbar from "./Topbar";
+import EditUser from "./EditUser";
 
 class Users extends React.Component {
     static contextType = AppContext;
@@ -17,6 +18,7 @@ class Users extends React.Component {
         this.retrieveUsers();
         this.retrieveUserPosts();
         this.showUserPosts = this.showUserPosts.bind(this);
+        this.goToEditUser = this.goToEditUser.bind(this);
     }
 
     retrieveUsers(){
@@ -43,15 +45,25 @@ class Users extends React.Component {
     }
 
 
+    goToEditUser(event, id){
+      this.context.setUserId(id);
+      this.history.push("/edituser");
+    }
+
     render() {
         return <div>
             <Navbar />
             <Topbar />
             <h6>This is the list of users:</h6>
-            <ol> 
-            {this.context.listOfUsers.map(user => 
-            <li><div id = {user.id} onClick = {this.showUserPosts}>{user.name}-{user.address.geo.lat}</div></li>)}
-            </ol>
+             
+            {this.context.listOfUsers.map((user, index) => 
+            
+            <div onClick = {this.showUserPosts}>{index}. {user.name}-{user.address.geo.lat}
+              <button style = {{float: "right"}} type="button" className="btn btn-primary tiny" onClick = {event=>this.goToEditUser(event, user.id)}>Edit</button>
+              <br/><br/></div>
+              
+              )}
+            
             
         </div>
     }

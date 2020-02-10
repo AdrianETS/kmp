@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard";
 import Auth from "./utils/Auth";
 import Users from "./components/Users";
 import CreateUser from "./components/CreateUser";
+import EditUser from "./components/EditUser";
 
 class App extends React.Component {
 
@@ -26,6 +27,7 @@ class App extends React.Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path= "/users" component={Users} />
             <Route path= "/createuser" component={CreateUser} />
+            <Route path= "/edituser" component={EditUser} />
           </Switch>
         </Router>
       </ContextProvider>
