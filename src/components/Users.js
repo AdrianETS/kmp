@@ -47,7 +47,7 @@ class Users extends React.Component {
 
     goToEditUser(event, id){
       this.context.setUserId(id);
-      this.history.push("/edituser");
+      this.props.history.push("/edituser");
     }
 
     render() {

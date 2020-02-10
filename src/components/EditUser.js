@@ -7,11 +7,29 @@ class EditUser extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            name: "",
+            userName: "",
+            email: ""
+        }
     }
 
-    render(){
-        return (<div></div>);
+    componentDidMount() {
+        let filteredList = this.context.listOfUsers.filter(user => (user.id == this.context.userId));
+        filteredList.length > 0 && this.setState({name: filteredList[0].name, userName:filteredList[0].username, email: filteredList[0].email });
+
+    }
+
+    componentDidUpdate() {
+
+    }
+
+    render() {
+        return (<div>Welcome to Edit User
+            <h6>{this.state.name}</h6>
+            <h6>{this.state.userName}</h6>
+            <h6>{this.state.email}</h6>
+        </div>);
     }
 }
 
