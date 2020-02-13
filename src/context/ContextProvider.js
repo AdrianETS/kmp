@@ -10,12 +10,13 @@ export class ContextProvider extends React.Component {
         super(props);
 
         this.state = {userName: "", userLogged: false, 
-        listOfUsers: [], originalUsers: []};
+        listOfUsers: [], originalUsers: [], listOfUserPosts:[]};
         this.processLogout = this.processLogout.bind(this);
         this.setUserLogged = this.setUserLogged.bind(this);
         this.setUserName = this.setUserName.bind(this);
         this.setListOfUsers = this.setListOfUsers.bind(this);
         this.setOriginalUsers = this.setOriginalUsers.bind(this);
+        this.setListOfUserPosts = this.setListOfUserPosts.bind(this);
 
         this.setUserId = this.setUserId.bind(this);
     }
@@ -48,6 +49,10 @@ export class ContextProvider extends React.Component {
         this.setState({listOfUsers: list});
     }
 
+    setListOfUserPosts(posts){
+        this.setState({listOfUserPosts: posts});
+    }
+
 
     setOriginalUsers(list){
         this.setState({originalUsers: list});
@@ -61,7 +66,8 @@ export class ContextProvider extends React.Component {
         return (
             <AppContext.Provider
                 value={{ ...this.state, setUserLogged: this.setUserLogged, processLogout:this.processLogout, setUserName: this.setUserName,
-                    setListOfUsers: this.setListOfUsers, setOriginalUsers: this.setOriginalUsers, setUserId: this.setUserId}}
+                    setListOfUsers: this.setListOfUsers, setOriginalUsers: this.setOriginalUsers, setUserId: this.setUserId,
+                    setListOfUserPosts: this.setListOfUserPosts}}
             >
 
                 {this.props.children}

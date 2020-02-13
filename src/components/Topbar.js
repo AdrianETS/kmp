@@ -66,7 +66,6 @@ class Topbar extends React.Component {
                 <br></br>
                 <input type="checkbox" value="South" onChange={this.searchUsersByLatSouth} /> South
                 <button type="button" className="btn btn-link" ><Link to="/createuser">Create users</Link></button>
-
                 <nav className="navbar navbar-light bg-light">
                     <a className="form-inline"></a>
                     <form className="form-inline">

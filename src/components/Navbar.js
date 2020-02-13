@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import { Link } from 'react-router-dom';
 import Logout from './Logout.js';
 import WelcomeMessage from "./WelcomeMessage";
+import Statistics from "./Statistics";
 
 class Navbar extends React.Component {
 
@@ -22,6 +23,7 @@ class Navbar extends React.Component {
                         <a className="nav-link active" href={"/#"}><Link to="/dashboard">Home</Link></a>
                         <a className="nav-link active" href={"/#"}><Link to="/about">About</Link></a>
                         <a className="nav-link active" href={"/#"}><Link to="/users">Users</Link></a>
+                        <a className="nav-link active" href={"/#"}><Link to="/statistics">Statistics</Link></a>
                         
                             <div className="ml-auto" style = {{float: "right"}}>
                                 <ContextConsumer>
