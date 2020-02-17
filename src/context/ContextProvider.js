@@ -9,65 +9,78 @@ export class ContextProvider extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {userName: "", userLogged: false, 
-        listOfUsers: [], originalUsers: [], listOfUserPosts:[]};
+        this.state = {
+            userName: "", 
+            userLogged: false,
+            listOfUsers: [], 
+            originalUsers: [], 
+            listOfUserPosts: [],
+            listOfComments: []
+        };
         this.processLogout = this.processLogout.bind(this);
         this.setUserLogged = this.setUserLogged.bind(this);
         this.setUserName = this.setUserName.bind(this);
         this.setListOfUsers = this.setListOfUsers.bind(this);
         this.setOriginalUsers = this.setOriginalUsers.bind(this);
         this.setListOfUserPosts = this.setListOfUserPosts.bind(this);
+        this.setListOfComments = this.setListOfComments.bind(this);
 
         this.setUserId = this.setUserId.bind(this);
     }
 
 
-    processLogout(){
-        this.setState({userLogged: false, userName: ""});
+    processLogout() {
+        this.setState({ userLogged: false, userName: "" });
         Auth.removeUserCredentials();
     }
 
-    setUserLogged(status){
-        this.setState({userLogged: status}); 
-        
+    setUserLogged(status) {
+        this.setState({ userLogged: status });
+
     }
 
-    setUserName(user){
-        this.setState({userName: user});
+    setUserName(user) {
+        this.setState({ userName: user });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         Auth.checkLocalAuth() && this.setUserValues();
     }
-   
 
-    setUserValues(){
-        this.setState({userLogged: true, userName: Auth.getUserName()});
+
+    setUserValues() {
+        this.setState({ userLogged: true, userName: Auth.getUserName() });
     }
 
-    setListOfUsers(list){
-        this.setState({listOfUsers: list});
+    setListOfUsers(list) {
+        this.setState({ listOfUsers: list });
     }
 
-    setListOfUserPosts(posts){
-        this.setState({listOfUserPosts: posts});
+    setListOfUserPosts(posts) {
+        this.setState({ listOfUserPosts: posts });
+    }
+
+    setListOfComments(comments) {
+        this.setState({ listOfComments: comments });
     }
 
 
-    setOriginalUsers(list){
-        this.setState({originalUsers: list});
+    setOriginalUsers(list) {
+        this.setState({ originalUsers: list });
     }
 
-    setUserId(id){
-        this.setState({userId: id});
+    setUserId(id) {
+        this.setState({ userId: id });
     }
 
     render() {
         return (
             <AppContext.Provider
-                value={{ ...this.state, setUserLogged: this.setUserLogged, processLogout:this.processLogout, setUserName: this.setUserName,
+                value={{
+                    ...this.state, setUserLogged: this.setUserLogged, processLogout: this.processLogout, setUserName: this.setUserName,
                     setListOfUsers: this.setListOfUsers, setOriginalUsers: this.setOriginalUsers, setUserId: this.setUserId,
-                    setListOfUserPosts: this.setListOfUserPosts}}
+                    setListOfUserPosts: this.setListOfUserPosts, setListOfComments: this.setListOfComments
+                }}
             >
 
                 {this.props.children}

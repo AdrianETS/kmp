@@ -5,7 +5,7 @@ import Dashboard from "./Dashboard";
 import { Link } from 'react-router-dom';
 import Logout from './Logout.js';
 import WelcomeMessage from "./WelcomeMessage";
-import Statistics from "./Statistics";
+import StatisticsPosts from "./StatisticsPosts";
 
 class Navbar extends React.Component {
 
@@ -23,17 +23,25 @@ class Navbar extends React.Component {
                         <a className="nav-link active" href={"/#"}><Link to="/dashboard">Home</Link></a>
                         <a className="nav-link active" href={"/#"}><Link to="/about">About</Link></a>
                         <a className="nav-link active" href={"/#"}><Link to="/users">Users</Link></a>
-                        <a className="nav-link active" href={"/#"}><Link to="/statistics">Statistics</Link></a>
-                        
-                            <div className="ml-auto" style = {{float: "right"}}>
-                                <ContextConsumer>
-                                {({ userName}) => <WelcomeMessage />}
-                                </ContextConsumer>
-                                <ContextConsumer>
-                                    {({ processLogout }) => <Logout />}
-                                </ContextConsumer>
+
+                        <div className="dropdown">
+                            <a href="#" className="dropdown-toggle" data-toggle="dropdown">Statistics</a>
+                            <div className="dropdown-menu">
+                                <a className="nav-link active" href={"/#"}><Link to="/statisticsposts">Posts per user</Link></a>
+                                <a className="nav-link active" href={"/#"}><Link to="/statisticscomments">Comments per user</Link></a>
                             </div>
-                        
+                        </div>
+
+
+                        <div className="ml-auto" style={{ float: "right" }}>
+                            <ContextConsumer>
+                                {({ userName }) => <WelcomeMessage />}
+                            </ContextConsumer>
+                            <ContextConsumer>
+                                {({ processLogout }) => <Logout />}
+                            </ContextConsumer>
+                        </div>
+
                     </div>
                 </nav>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { AppContext } from "./../context/ContextProvider";
+import { AppContext } from "../context/ContextProvider";
 import Navbar from "./Navbar";
 
 import * as am4core from "@amcharts/amcharts4/core";
@@ -8,7 +8,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 
-class Statistics extends React.Component {
+class StatisticsPosts extends React.Component {
 
     static contextType = AppContext;
 
@@ -21,6 +21,7 @@ class Statistics extends React.Component {
     }
 
     componentDidMount() {
+        !this.context.userLogged && this.props.history.push("/");
         this.retrieveUsers()
         .then(()=>this.retrieveUserPosts())
         .then(()=>this.createChart());
@@ -57,8 +58,8 @@ class Statistics extends React.Component {
     }
 
     retrieveUsers() {
-        /*hemos cambiado estos métodos con respecto a los que teníamos en Users porque antes teníamos funciones síncronas pero ahora, devolviendo
-        promesas, tenemos una función asíncrona. Esto lo necesitamos para el componentDidMount; forzamos la secuencia para que primero se ejecuten las
+        /*hemos cambiado estos métodos con respecto a los que teníamos en Users porque antes teníamos funciones síncronas con métodos asíncronos
+        dentro pero ahora, devolviendo promesas, tenemos una función puramente asíncrona. Esto lo necesitamos para el componentDidMount; forzamos la secuencia para que primero se ejecuten las
         funciones asíncronas y por último getXaxisData, que es síncrona. El motor solo tiene un thread, así que primero ejecuta los bloques síncronos
         . Antes estas funciones lo eran, así que cuando llega al fetch, el motor lo deja en la pila de asíncronos. Misma situación con retrieveUserPosts,
         y después getXaxisData. El problema era que al buscar los datos del array que le pasamos con getXaxisData, éste está vacío. Ejecuta todo el
@@ -108,4 +109,4 @@ class Statistics extends React.Component {
 
 }
 
-export default Statistics;
+export default StatisticsPosts;
